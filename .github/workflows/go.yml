@@ -29,9 +29,9 @@ jobs:
       run: docker compose up -d postgres
 
     - name: Lint
-      uses: golangci/golangci-lint-action@v9
+      uses: golangci/golangci-lint-action@v6
       with:
-        version: v2.12
+        version: v1.54.2
         args: controllers/ database/ models/ routes/
 
     - name: Test
@@ -39,7 +39,10 @@ jobs:
 
   build:
     needs: ci
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'ubuntu-22.04']
     steps:
     - uses: actions/checkout@v4
 
