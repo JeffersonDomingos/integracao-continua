@@ -22,7 +22,4 @@ jobs:
         username: jeffersondmorais
 
         # Password or personal access token used to log against the Docker registry
-        password: 
-
-        # Log out from the Docker registry at the end of a job
-        logout: # optional, default is true
+        password: ${{ secrets.PASSWORD_DOCKER_HUB }}
