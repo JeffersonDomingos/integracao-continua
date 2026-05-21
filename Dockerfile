@@ -1,15 +1,19 @@
-FROM ubuntu:latest
-
-EXPOSE 8000
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 
-ENV DB_HOST=localhost DB_PORT=5432
+COPY . .
 
-ENV DB_USER=root DB_PASSWORD=root DB_NAME=root
+RUN go build -o main main.go
 
-COPY ./main main
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/main .
 
 RUN chmod +x ./main
 
-ENTRYPOINT [ "./main" ]
+EXPOSE 8000
+
+ENTRYPOINT ["./main"]
