@@ -46,4 +46,4 @@ jobs:
 
           # List of tags
           platforms: linux/amd64,linux/arm64
-          tags: jeffersondmorais/go_ci:${{github.ref_name}}
+          tags: jeffersondmorais/go_ci:${{ github.head_ref || github.ref_name }}
